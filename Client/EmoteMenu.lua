@@ -287,12 +287,12 @@ Citizen.CreateThread(function()
     end
 end)
 
-RegisterNetEvent("dp:Update")
-AddEventHandler("dp:Update", function(state)
-    UpdateAvailable = state
-    AddInfoMenu(mainMenu)
-    _menuPool:RefreshIndex()
-end)
+-- RegisterNetEvent("dp:Update")
+-- AddEventHandler("dp:Update", function(state)
+--     UpdateAvailable = state
+--     AddInfoMenu(mainMenu)
+--     _menuPool:RefreshIndex()
+-- end)
 
 RegisterNetEvent("dp:RecieveMenu") -- For opening the emote menu from another resource.
 AddEventHandler("dp:RecieveMenu", function()
