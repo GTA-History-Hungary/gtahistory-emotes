@@ -109,9 +109,9 @@ function EmoteChatMessage(args)
   end
 end
 
-function DebugPrint(args)
+function DebugPrint(...)
   if Config.DebugDisplay then
-    print(args)
+    print(...)
   end
 end
 
