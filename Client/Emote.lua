@@ -76,6 +76,9 @@ end)
 -----------------------------------------------------------------------------------------------------
 
 function EmoteCancel()
+  if (GetMovementMode()) then
+    SetMovementMode(false)
+  end
 
   if ChosenDict == "MaleScenario" and IsInAnimation then
     ClearPedTasksImmediately(PlayerPedId())
@@ -95,12 +98,6 @@ function EmoteCancel()
     ClearPedTasks(GetPlayerPed(-1))
     DestroyAllProps()
     IsInAnimation = false
-  end
-  
-  if (GetMovementMode()) then
-    SetEntityCoordsNoOffset(GetPlayerPed(-1), GetStartCoords())
-    FreezeEntityPosition(GetPlayerPed(-1), false)
-    SetMovementMode(false)
   end
 end
 

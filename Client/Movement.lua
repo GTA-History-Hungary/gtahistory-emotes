@@ -1,12 +1,21 @@
 InMovementMode = false
-local Ped, EmoteName, StartCoords = GetPlayerPed(-1), nil, nil
+local Ped, EmoteName, StartCoords = -1, nil, nil
 
 function SetMovementMode(bool, GotEmoteName)
-    InMovementMode = bool == true
-    EmoteName = GotEmoteName
+    if bool == false and InMovementMode and StartCoords then
+        FreezeEntityPosition(Ped, false)
+        SetEntityCoordsNoOffset(Ped, StartCoords)
+    end
 
     Ped = GetPlayerPed(-1)
-    StartCoords = GetEntityCoords(Ped)
+
+    if(not InMovementMode and bool == true) then
+        StartCoords = GetEntityCoords(Ped)
+        print('set StartCoords', StartCoords)
+    end
+
+    InMovementMode = bool == true
+    EmoteName = GotEmoteName
 
     if (not IsPedInAnyVehicle(Ped, false)) then
         FreezeEntityPosition(Ped, InMovementMode)
@@ -15,10 +24,6 @@ end
 
 function GetMovementMode()
     return InMovementMode
-end
-
-function GetStartCoords()
-    return StartCoords
 end
 
 RegisterNetEvent('gtahistory-emotes:client:syncPosition')
