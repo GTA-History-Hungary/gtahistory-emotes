@@ -96,6 +96,12 @@ function EmoteCancel()
     DestroyAllProps()
     IsInAnimation = false
   end
+  
+  if (GetMovementMode()) then
+    SetEntityCoordsNoOffset(GetPlayerPed(-1), GetStartCoords())
+    FreezeEntityPosition(GetPlayerPed(-1), false)
+    SetMovementMode(false)
+  end
 end
 
 function EmoteChatMessage(args)
@@ -315,6 +321,7 @@ function OnEmotePlay(EmoteName)
         TaskStartScenarioInPlace(GetPlayerPed(-1), ChosenAnimation, 0, true)
         DebugPrint("Playing scenario = ("..ChosenAnimation..")")
         IsInAnimation = true
+        SetMovementMode(true, EmoteName)
       else
         EmoteChatMessage(Config.Languages[lang]['maleonly'])
       end return
@@ -324,12 +331,14 @@ function OnEmotePlay(EmoteName)
       TaskStartScenarioAtPosition(GetPlayerPed(-1), ChosenAnimation, BehindPlayer['x'], BehindPlayer['y'], BehindPlayer['z'], GetEntityHeading(PlayerPedId()), 0, 1, false)
       DebugPrint("Playing scenario = ("..ChosenAnimation..")")
       IsInAnimation = true
+      SetMovementMode(true, EmoteName)
       return
     elseif ChosenDict == "Scenario" then if InVehicle then return end
       ClearPedTasks(GetPlayerPed(-1))
       TaskStartScenarioInPlace(GetPlayerPed(-1), ChosenAnimation, 0, true)
       DebugPrint("Playing scenario = ("..ChosenAnimation..")")
       IsInAnimation = true
+      SetMovementMode(true, EmoteName)
     return end 
   end
 
@@ -357,6 +366,9 @@ function OnEmotePlay(EmoteName)
   if InVehicle == 1 then
     MovementType = 51
   end
+
+  -- Turn on movement mode if not only upperbody anim
+  SetMovementMode(MovementType ~= 51, EmoteName)
 
   if EmoteName.AnimationOptions then
     if EmoteName.AnimationOptions.EmoteDuration == nil then 
