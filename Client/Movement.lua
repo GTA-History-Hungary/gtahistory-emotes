@@ -56,6 +56,7 @@ Citizen.CreateThread(function()
 
             if (needsSync and counter > 20) then
                 counter = 0
+                needsSync = false
                 TriggerServerEvent('gtahistory-emotes:server:syncPosition', GetEntityCoords(Ped), GetEntityHeading(Ped))
             end
         end
