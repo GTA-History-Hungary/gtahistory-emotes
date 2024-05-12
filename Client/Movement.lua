@@ -11,7 +11,7 @@ function SetMovementMode(bool, GotEmoteName)
 
     if(not InMovementMode and bool == true) then
         StartCoords = GetEntityCoords(Ped)
-        print('set StartCoords', StartCoords)
+        DebugPrint('set StartCoords', StartCoords)
     end
 
     InMovementMode = bool == true
