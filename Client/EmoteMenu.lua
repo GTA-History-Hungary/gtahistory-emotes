@@ -75,31 +75,23 @@ function AddEmoteMenu(menu)
       table.insert(EmoteTable, Config.Languages[lang]['shareemotes'])
     end
 
-    if not Config.SqlKeybinding then
-      unbind2item = NativeUI.CreateItem(Config.Languages[lang]['rfavorite'], Config.Languages[lang]['rfavorite'])
-      unbinditem = NativeUI.CreateItem(Config.Languages[lang]['prop2info'], "")
-      favmenu = _menuPool:AddSubMenu(submenu, Config.Languages[lang]['favoriteemotes'], Config.Languages[lang]['favoriteinfo'], "", Menuthing, Menuthing)
-      favmenu:AddItem(unbinditem)
-      favmenu:AddItem(unbind2item)
-      table.insert(FavEmoteTable, Config.Languages[lang]['rfavorite'])
-      table.insert(FavEmoteTable, Config.Languages[lang]['rfavorite'])
-      table.insert(EmoteTable, Config.Languages[lang]['favoriteemotes'])
-    else
-      table.insert(EmoteTable, "keybinds")
-      keyinfo =  NativeUI.CreateItem(Config.Languages[lang]['keybinds'], Config.Languages[lang]['keybindsinfo'].." /emotebind [~y~num4-9~w~] [~g~emotename~w~]")
-      submenu:AddItem(keyinfo)
-    end
+    unbind2item = NativeUI.CreateItem(Config.Languages[lang]['rfavorite'], Config.Languages[lang]['rfavorite'])
+    unbinditem = NativeUI.CreateItem(Config.Languages[lang]['prop2info'], "")
+    favmenu = _menuPool:AddSubMenu(submenu, Config.Languages[lang]['favoriteemotes'], Config.Languages[lang]['favoriteinfo'], "", Menuthing, Menuthing)
+    favmenu:AddItem(unbinditem)
+    favmenu:AddItem(unbind2item)
+    table.insert(FavEmoteTable, Config.Languages[lang]['rfavorite'])
+    table.insert(FavEmoteTable, Config.Languages[lang]['rfavorite'])
+    table.insert(EmoteTable, Config.Languages[lang]['favoriteemotes'])
 
     for a,b in pairsByKeys(DP.Emotes) do
       x,y,z = table.unpack(b)
       emoteitem = NativeUI.CreateItem(z, "/e ("..a..")")
       submenu:AddItem(emoteitem)
       table.insert(EmoteTable, a)
-      if not Config.SqlKeybinding then
-        favemoteitem = NativeUI.CreateItem(z, Config.Languages[lang]['set']..z..Config.Languages[lang]['setboundemote'])
-        favmenu:AddItem(favemoteitem)
-        table.insert(FavEmoteTable, a)
-      end
+      favemoteitem = NativeUI.CreateItem(z, Config.Languages[lang]['set']..z..Config.Languages[lang]['setboundemote'])
+      favmenu:AddItem(favemoteitem)
+      table.insert(FavEmoteTable, a)
     end
 
     for a,b in pairsByKeys(DP.Dances) do
@@ -131,23 +123,19 @@ function AddEmoteMenu(menu)
       propitem = NativeUI.CreateItem(z, "/e ("..a..")")
       propmenu:AddItem(propitem)
       table.insert(PropETable, a)
-      if not Config.SqlKeybinding then
-        propfavitem = NativeUI.CreateItem(z, Config.Languages[lang]['set']..z..Config.Languages[lang]['setboundemote'])
-        favmenu:AddItem(propfavitem)
-        table.insert(FavEmoteTable, a)
-      end
+      propfavitem = NativeUI.CreateItem(z, Config.Languages[lang]['set']..z..Config.Languages[lang]['setboundemote'])
+      favmenu:AddItem(propfavitem)
+      table.insert(FavEmoteTable, a)
     end
 
-    if not Config.SqlKeybinding then
-      favmenu.OnItemSelect = function(sender, item, index)
-        if FavEmoteTable[index] == Config.Languages[lang]['rfavorite'] then
-          FavoriteEmote = ""
-          ShowNotification(Config.Languages[lang]['rfavorite'], 2000)
-        return end 
-        if Config.FavKeybindEnabled then
-          FavoriteEmote = FavEmoteTable[index]
-          ShowNotification("~o~"..firstToUpper(FavoriteEmote)..Config.Languages[lang]['newsetemote']) 
-        end
+    favmenu.OnItemSelect = function(sender, item, index)
+      if FavEmoteTable[index] == Config.Languages[lang]['rfavorite'] then
+        FavoriteEmote = ""
+        ShowNotification(Config.Languages[lang]['rfavorite'], 2000)
+      return end 
+      if Config.FavKeybindEnabled then
+        FavoriteEmote = FavEmoteTable[index]
+        ShowNotification("~o~"..firstToUpper(FavoriteEmote)..Config.Languages[lang]['newsetemote']) 
       end
     end
 
