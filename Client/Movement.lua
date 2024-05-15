@@ -26,6 +26,15 @@ function GetMovementMode()
     return InMovementMode
 end
 
+function MovePed(entity, coords, heading)
+    if (GetDistanceBetweenCoords(coords, StartCoords, true) >= 2) then
+        return
+    end
+
+    SetEntityCoordsNoOffset(entity, coords, true)
+    SetEntityHeading(entity, heading)
+end
+
 RegisterNetEvent('gtahistory-emotes:client:syncPosition')
 AddEventHandler('gtahistory-emotes:client:syncPosition', function (target, pos, rot)
     local ped = GetPlayerPed((GetPlayerFromServerId(target)))
