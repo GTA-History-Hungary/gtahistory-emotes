@@ -49,6 +49,7 @@ Citizen.CreateThread(function()
 
         if not InMovementMode then
             Citizen.Wait(1000)
+            needsSync = false
         else
             for key, func in pairs(Config.MovementKeys) do
                 DisableControlAction(0, key, true)
