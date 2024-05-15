@@ -51,28 +51,22 @@ Config.KeybindKeys = {
 -- Q E forgatás
 Config.MovementKeys = {
       [32] = function(entity)  -- W
-            local heading = GetEntityHeading(entity)
-            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.05, 0.0), heading)
+            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.05, 0.0), GetEntityHeading(entity))
       end,
       [33] = function(entity)  -- S
-            local heading = GetEntityHeading(entity)
-            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, -0.05, 0.0), heading)
+            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, -0.05, 0.0), GetEntityHeading(entity))
       end,
       [35] = function(entity)  -- D
-            local heading = GetEntityHeading(entity)
-            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.05, 0.0, 0.0), heading)
+            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.05, 0.0, 0.0), GetEntityHeading(entity))
       end,
       [34] = function(entity)  -- A
-            local heading = GetEntityHeading(entity)
-            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, -0.05, 0.0, 0.0), heading)
+            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, -0.05, 0.0, 0.0), GetEntityHeading(entity))
       end,
       [61] = function(entity)  -- Shift
-            local heading = GetEntityHeading(entity)
-            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.0, 0.05), heading)
+            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.0, 0.05), GetEntityHeading(entity))
       end,
       [62] = function(entity)  -- Ctrl
-            local heading = GetEntityHeading(entity)
-            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.0, -0.05), heading)
+            MovePed(entity, GetOffsetFromEntityInWorldCoords(entity, 0.0, 0.0, -0.05), GetEntityHeading(entity))
       end,
 
       [44] = function(entity)  -- Q
